@@ -1,0 +1,28 @@
+{
+  "files": {
+    "cogs/fun.py": [
+      {
+        "id": "2f3019a3-edc2-45c5-a5e7-76029a150315",
+        "line": 236,
+        "version": 11590,
+        "index": 6458
+      }
+    ],
+    "cogs/misc.py": [
+      {
+        "id": "4fdd04f7-95a6-43c9-a2e4-d7937396d9b1",
+        "line": 18,
+        "version": 3192,
+        "index": 315
+      }
+    ],
+    "main.py": [
+      {
+        "id": "416e1ca1-859e-4a32-95a1-1a0f868760d9",
+        "line": 74,
+        "version": 6431,
+        "index": 1348
+      }
+    ]
+  }
+}

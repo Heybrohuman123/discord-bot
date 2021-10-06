@@ -1,90 +1,62 @@
 import keep_alive
-import discord
+import nextcord
 import os
-from discord.ext import commands
+import asyncio
 
-intents = discord.Intents.default()
+from nextcord.ext import commands
+
+
+intents = nextcord.Intents.default()
 intents.members = True
 
-client = discord.Client(intents=intents)
-client = commands.Bot(command_prefix = "!")
+client = nextcord.Client(intents=intents)
+client = commands.Bot(command_prefix="p!")
+client.remove_command("help")
 
 
 
-#if __name__ == '__main__':
-#  for extension in intial_extensions:
-#    try:  #So, every try: has to have an except: after it. So because that it will give an error.
-#      client.load_extension(extension)
-#    except:
-#      pass
+
+
+VERSION = 'v.0.1 Beta'
+DEFAULTPREFIX = '!'
 
 
 
+client.colors = {
+    'BLURPLE': 0x5865F2,
+    'WHITE': 0xFFFFFF,
+    'GREYPLE': 0x23272A,  
+    'COLOR1': 0x99AAB5,
+    'COLOR2': 0xF6F6F6
+}
+
+client.color_list = [c for c in client.colors.values()]
+client.DEFAULTPREFIX = DEFAULTPREFIX
 
 # events
 # idk lolll
 
+
 @client.event
 async def on_ready():
-    await client.change_presence(activity=discord.Game(name="!help"))
+    print(f"Prefix: {DEFAULTPREFIX}\nVersion: {VERSION}")
+    print("This bot is ready.")
 
 
+
+
+
+
+    
 
 
 # cogs
 # to store stuff and things
 
-cogs = ['cogs.fun', 'cogs.misc', 'cogs.mod']
-
-for cog in cogs:
-  try:
-    client.load_extension(cog)
-  except Exception as e:
-    print(f'Could not load cog {cog}: {str(e)}')
-
-@client.command()
-@commands.has_permissions(administrator=True)
-async def loadcog(ctx, cogname = None):
-
-  if cogname is None:
-    return
-
-  try:
-    client.load_extension(cogname)
-  except Exception as e:
-    embed=discord.Embed(title="Oopsie", colour=discord.Colour(0xdf2723))
-    embed.add_field(name="Output:", value=(f"Could not load cog {cog}: {str(e)}"))
-    await ctx.send(embed=embed)
-  else:
-    embed=discord.Embed(title="Woohoo!")
-    embed.add_field(name="You successfully:", value=(f"loaded {cog}"))
-    await ctx.send(embed=embed)
-
-@client.command()
-@commands.has_permissions(administrator=True)
-async def unloadcog(ctx, cogname = None):
-
-  if cogname is None:
-    return
-
-  try:
-    client.unload_extension(cogname)
-  except Exception as e:
-    embed=discord.Embed(title="Oopsie", colour=discord.Colour(0xdf2723))
-    embed.add_field(name="Output:", value=(f"Could not unload cog {cog}: {str(e)}"))
-    await ctx.send(embed=embed)
-  else:
-    embed=discord.Embed(title="Woohoo!")
-    embed.add_field(name="You successfully:", value=(f"unloaded {cog}"))
-    await ctx.send(embed=embed)
-
-
-
-
-
-
-
-
+if __name__ == '__main__':
+	for file in os.listdir("cogs"):
+		if file.endswith(".py") and not file.startswith("_"):
+			client.load_extension(f"cogs.{file[:-3]}")
 
 
 
