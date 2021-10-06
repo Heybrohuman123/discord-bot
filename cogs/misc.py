@@ -20,7 +20,15 @@ class Misc(commands.Cog, description="You get to know about everything, well not
 
   @commands.command(description="Tells the bots latency.")
   async def ping(self, ctx):
-    await ctx.send(f"Pong! {round(self.client.latency * 1000)}ms")
+    await ctx.send(f":ping_pong: || {round(self.client.latency * 1000)}ms!")
+
+  @commands.command()
+  async def avatar(self, ctx):
+    profilepic = ctx.author.avatar.url
+    embed=nextcord.Embed(title=f"Here is {ctx.author} profile picture!")
+    embed.set_image(url=profilepic)
+    await ctx.send(embed=embed)
+    
 
   
       
