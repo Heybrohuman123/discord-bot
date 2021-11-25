@@ -1,7 +1,5 @@
-# discord-bot
-This is D1zease Discord Bot :)
+# READ ME THANK YOU!
 
-If you would like to copy the soure code, please make sure you credit the original player!
-ty <3
+If you are trying to use this bot, make sure to credit the creators!
 
-ty to verq alsoo~
+~ love you, anonymous

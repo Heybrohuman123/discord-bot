@@ -14,9 +14,7 @@ class Social(commands.Cog, description="Events :)"):
     async def on_ready(self):
         print(f"{self.__class__.__name__} Cog has been loaded\n-----")
 
-    @commands.command()
-    async def discord(self, ctx):
-      await ctx.send("Discord Server:\n")
+
 
 def setup(bot):
     bot.add_cog(Social(bot))

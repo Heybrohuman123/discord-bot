@@ -1,19 +1,16 @@
 import keep_alive
 import nextcord
 import os
-import asyncio
+
 
 
 from nextcord.ext import commands
-
 
 intents = nextcord.Intents.default()
 intents.members = True
 
 client = nextcord.Client(intents=intents)
 client = commands.Bot(command_prefix="p!")
-client.remove_command("help")
-
 
 
 
@@ -47,9 +44,38 @@ async def on_ready():
 
 
 
+class Confirm(nextcord.ui.View):
+    def __init__(self):
+        super().__init__(timeout=None)
+
+    @nextcord.ui.button(label="Confirm", style=nextcord.ButtonStyle.blurple)
+    async def confirm(self, button: nextcord.ui.Button, interaction: nextcord.Interaction):
+        await interaction.response.send_message("https://discord.gg/eabgwr27sk", ephemeral=True)
+        self.value = True
+        self.stop()
+
+    @nextcord.ui.button(label="Cancel", style=nextcord.ButtonStyle.danger)
+    async def cancel(self, button: nextcord.ui.Button, interaction: nextcord.Interaction):
+        await interaction.response.send_message("Oh. Okay, goodbye :(", ephemeral=True)
+        self.value = False
+        self.stop()
 
 
-    
+
+@client.command()
+async def discord(ctx):
+    view = Confirm()
+    await ctx.send("Do you want to confirm somthing.", view=view)
+
+    await view.wait()
+
+    if not view.value == None:
+        print("Timed Out")
+    if view.value == True:
+        print("True i guess lemao")
+    if view.value == False:
+        print("False i guess lemao")
+
 
 
 # cogs
